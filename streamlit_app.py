@@ -28,8 +28,8 @@ def analyze_stock(symbol):
 
     df['volume_avg'] = df['Volume'].rolling(window=20).mean()
     close_series = df['Close'].squeeze()
-    df['rsi'] = ta.momentum.RSIIndicator(close=close_series, window=14).rsi()
-    macd = ta.trend.MACD(close=close_series)
+    df['rsi'] = ta.momentum.RSIIndicator(close=df['Close'].squeeze(), window=14).rsi()
+    macd = ta.trend.MACD(close=df['Close'].squeeze())
     df['macd_diff'] = macd.macd_diff()
 
     close = df['Close'].iloc[-1]
